@@ -1,0 +1,62 @@
+==== CONTEXT ====
+Pokemon RPG Bot
+- This is a bot for a Discord server. Discord is a text and voice chat service.
+- The bot needs to be able to respond to text input. The bot will not respond to all input, only those prefixed with a specific command (in this case, r!<Command>).
+- The processing time for a command response should be minimal.
+
+Example transcript:
+You: r!hello
+Bot: hello <Your username>!
+
+- In this case, the bot exists to support a art-based role-playing game (ARPG).
+- Currently, the moderators of the ARPG use a number of dice rolls (randomly generated numbers) to dictate events and rewards for the players.
+
+Example transcript:
+Moderator: d!10 (This is a command for an existing dice rolling bot. The command rolls a 10-sided dice - in order words, it generates a random number between 1 and 10)
+Bot: 3
+
+- The moderator then cross-references the number against a predetermined list of rewards (i.e. there is a text list stored elsewhere stating "1 = Bottled Water, 2 = Heart Scale, 3 = Big Pearl", etc.)
+- The aim of this bot is to simplify the dice rolls for the moderator.
+- Some commands will contain multiple dice rolls. Each command should perform all necessary rolls and respond to the moderator with the user-friendly name of the event or reward.
+
+Example transcript:
+Moderator: d!136
+Bot: 91
+Moderator: (manually looks up the number on their text list)  You rolled a Water Stone!
+
+- This will become:
+Moderator: r!fish
+Bot: (The bot generates the random number 91) Congratulations! You fished up a Water Stone!
+
+=== WHAT I NEED HELP WITH ===
+SOLID Principles and Code Structure
+- I am using this project to teach myself how to follow SOLID principles and practice dependency injection.
+- The connection to Discord is handled via an API and already works, so I can send a command and the bot will respond. Don't worry about this part.
+- I have several commands to write responses for and I have begun with the fishing command (r!fish). The command works but the code is very, very messy and needs refactoring.
+- I need help understanding how to structure the code based on the following requirements for the fishing command:
+	- A random number between 1 and 136 is generated
+	- If the number falls between 1 and 55, the reward is a pokemon.
+	- If the number falls between 56 and 136, the reward is an item.
+	- If the reward is a pokemon, it can have a trait. Most items do not have traits, but a couple may do in the future.
+	- To determine the trait for a pokemon, a second random number between 1 and 100 is generated (this could also be between 1 and 10 because of the odds we're using).
+	- If the second random number falls between 1 and 10, the pokemon gains a special trait.
+	- A third random number between 1 and 5 is generated. The number rolled directly correlates to the Trait (1 = Shiny, 2 = Albino, 3 = Melanistic, etc.)
+	
+Example transcript:
+Moderator: d!136
+Bot: 34
+Moderator: (looks up the number on the list) Piplup!
+Moderator: d!100
+Bot: 9
+Moderator: It's traited!
+Moderator: d!5
+Bot: 2
+Moderator: Albino Piplup!
+
+This should become simplified to:
+Moderator: r!fish
+Bot: Congratulations! You fished up an Albino Popplio!
+
+=== CURRENT ISSUES ===
+Code structure is better but needs to be followed throughout the whole project
+Dependency injection is not working - take another look at ConfigureServices in Program.cs
