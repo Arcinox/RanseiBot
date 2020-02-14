@@ -1,5 +1,5 @@
 # RanseiBot
-A Discord bot for the Art-based Role-Playing Game (ARPG) Legends of Ransei
+A Discord bot for Legends of Ransei, an Art-based Role-Playing Game (ARPG)
 ------------
 Author: Jennifer Gold
 Peer Reviewer: Ian Battson
