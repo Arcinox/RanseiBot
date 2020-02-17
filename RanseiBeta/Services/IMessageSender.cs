@@ -11,6 +11,6 @@ namespace RanseiBeta
     {
         Task SendMessage(ICommandContext context, string message);
         Task SendMessage(ICommandContext context, string message, Color colour);
-        //Task SendMessage(string message);
+        Task SendMessageWithImage(ICommandContext context, string message, string fileName);
     }
 }

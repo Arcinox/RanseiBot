@@ -1,5 +1,6 @@
 ﻿using Discord;
 using Discord.Commands;
+using Discord.WebSocket;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -10,14 +11,6 @@ using static RanseiBeta.Enums;
 
 namespace RanseiBeta
 {
-    ////public class Test123<MODEL>
-    ////{
-    ////    public IEnumerable<MODEL> GetByInterface(Type typeOfInterface, IDictionary<int, MODEL> dictionary)
-    ////    {
-    ////        return dictionary.Values.Where(x => x.GetType() == typeOfInterface);
-    ////    }
-    ////}
-
     public class CommandModule : ModuleBase<SocketCommandContext>
     {
         private readonly IDiceRoller diceRoller;
@@ -32,8 +25,18 @@ namespace RanseiBeta
         [Command("hello")]
         private async Task HelloCommand()
         {
-            await messageSender.SendMessage(Context, $"My, how spirited! Hello @{Context.User.Username}#{Context.User.Discriminator}!", Color.Red);
-            ////await ReplyAsync($"My, how spirited! Hello @{Context.User.Username}#{Context.User.Discriminator}!");
+            await messageSender.SendMessage(Context, $"My, how spirited! Hello @{Context.User.Username}#{Context.User.Discriminator}!");
+        }
+
+        [Command("battle")]
+        private async Task BattleCommand()
+        {
+            string name = Context.User.Username;
+            if (Context.User is SocketGuildUser)
+            {
+                name = (Context.User as SocketGuildUser).Nickname;
+            }
+            await messageSender.SendMessageWithImage(Context, $"All right, {name}, let's battle!", "hop_battle_start.gif");
         }
 
         [Command("roll")]
